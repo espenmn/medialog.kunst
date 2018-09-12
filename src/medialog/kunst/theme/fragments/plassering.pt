@@ -1,0 +1,9 @@
+<div class="align-right" tal:condition="python: context.etasje_kart!='0'">
+    <p align="right">
+    <a class="align-right pat-plone-modal"
+    data-pat-plone-modal=""
+    href="#etasje-kart" title="Vis plassering på kart">
+        <img src="etasjeplan/etasje0${context/etasje_kart|None}/@@images/image/thumb"></a>
+    
+    </p>
+</div>

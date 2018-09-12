@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rules xmlns="http://namespaces.plone.org/diazo"
+       xmlns:css="http://namespaces.plone.org/diazo/css"
+       xmlns:xhtml="http://www.w3.org/1999/xhtml"
+       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+       xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <rules if="$default">
+	 <xi:include href="++theme++multitheme/default.xml"/>
+	</rules>
+
+  <rules if="$spot">
+	 <xi:include href="++theme++multitheme/spot.xml"/>
+	</rules>
+
+  <rules if="$head">
+   <xi:include href="++theme++multitheme/head_rules.xml"/>
+  </rules>
+
+
+  <after theme-children="/html/head" >
+  		<link href="++theme++kunsttheme/less/{$cssfile}/theme.css" rel="stylesheet"/>
+  </after>
+
+  <rules if="$fullwidth">
+    <after theme-children="/html/head" >
+       <link href="++theme++multitheme/css/fullpage.css" rel="stylesheet"/>
+    </after>
+   </rules>
+
+  <replace css:theme="#customcss" css:content="#customcss"  href="/@@theme-fragment/customcss"  />
+  
+
+</rules>

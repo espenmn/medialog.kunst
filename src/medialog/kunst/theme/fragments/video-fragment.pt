@@ -1,0 +1,7 @@
+<tal:condition tal:condition="context/videocode|None">
+<a href="#video-popup" class="pat-plone-modal" title="Klikk for å se video" alt="Klikk for å se video">
+	<i class="fa large-icon red fa-video-camera" aria-hidden="true"> </i> Se video på Vimeo
+</a>
+
+  <div id="video-popup" class="hidden" hidden tal:content="structure context/videocode|None"></div>
+</tal:condition>

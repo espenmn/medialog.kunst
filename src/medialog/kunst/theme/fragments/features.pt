@@ -1,0 +1,38 @@
+<section id="fragment-features"
+		 tal:define="keyword view/data/keyword; title view/data/title"
+		 data-anchor="anchor-${title}"
+		 title="${title}">
+    <div  tal:condition="keyword">
+    	<div class="center wow fadeInDown">
+      	<h1>${title}</h1>
+        <tal:condition tal:condition="view/data/description">
+        	<p class="documentDescription">${view/data/description}</p>
+      	</tal:condition>
+      </div>
+
+			<div tal:define="items python:context.portal_catalog(Subject='%s' % keyword)">
+
+			<tal:check tal:condition="items">
+				<div class="feature-items">
+					<div tal:repeat="item items"
+							class="feature  wow fadeInDown animated"
+							data-wow-delay="600ms" data-wow-duration="1000ms"
+							style="visibility: visible; animation-duration: 1000ms;
+							animation-delay: 600ms; animation-name: fadeInDown;">
+							<div class="feature-wrap fa"  tal:define="item_url item/getURL|item/absolute_url">
+								<a href="${item_url}">
+									<i  tal:condition="exists:item/iconfield" class="${item/iconfield}" />
+								 	<i class="fa-info" tal:condition="not:exists:item/iconfield" />
+									<h2>${item/Title}</h2>
+								</a>
+								<h4>${item/Description}</h4>
+							</div>
+        	</div>
+				</div>
+		</tal:check>
+    </div>
+    <tal:css tal:replace="structure context/@@fontload"/>
+		<tal:define tal:define="load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or '';">
+				<link rel="stylesheet" href="++theme++multitheme/css/${view/data/css_file}.css" tal:condition="load_css">
+		</tal:define>
+</section>

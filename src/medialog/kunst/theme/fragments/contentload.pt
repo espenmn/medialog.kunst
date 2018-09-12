@@ -1,0 +1,17 @@
+<section class="contentloader" id="fragment-${view/id}" tal:define="item view/load_item">
+<div id="content-target-${view/id}">
+<button type="button" class="btn btn-primary ${view/data/buttonstyle}">
+   <span href="#" class="pat-contentloader"
+     data-pat-contentloader="url:${view/item_url}?ajax_load=1;target:#content-target-${view/id};?ajax_load=1;content:#content">${view/data/buttontext}
+   </span>
+</button>
+<style>
+#content #portal-footer-wrapper {
+    display: none;
+}
+</style>
+</div>
+<tal:define tal:define="load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or '';">
+    <link rel="stylesheet" href="++theme++multitheme/css/contentload.css" tal:condition="load_css">
+</tal:define>
+</section>

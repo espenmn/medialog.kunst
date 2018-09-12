@@ -1,0 +1,51 @@
+<section class="counters" tal:define="color1 view/data/color1; color2 view/data/color2;
+          css_file view/data/css_file; folder_url request/form/folder_url|None;"
+          id="fragent-${view/id}"
+          data-anchor="anchor-counter"
+          title="counters">
+
+<div class="container pt-4 mt-2" tal:condition="folder_url">
+  <tal:repeat tal:repeat="item  context/?folder_url/@@contentlisting">
+    <div class="media-container-row">
+        <div class="card p-3 align-center col-12 col-md-6 col-lg-4">
+            <div class="panel-item p-3">
+              <div class="pb-3">
+                  <span class="mbri-mobirise mbr-iconfont fa ${item/iconfield} ${color1}" tal:condition="exists:item/iconfield" media-simple="true"></span>
+                  <span class="mbri-mobirise mbr-iconfont fa fa-info ${color1}" media-simple="true" tal:condition="not:exists:item/iconfield"></span>
+             </div>
+
+              <div class="card-text" tal:define="title item/Title">
+                <tal:check tal:condition="exists:item/countto">
+                    <h1 class="count pt-3 pb-3 ${color2}">${item/countto}</h1>
+                </tal:check>
+                    <h1 class="count pt-3 pb-3 ${color2}" tal:condition="not:exists:item/countto">${python:title.split()[0]}</h1>
+                    <h2 class="${color2}">${python:title.partition(' ')[2] or title}</h2>
+                    <p>${item/Description}</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    </tal:repeat>
+</div>
+<script>require([
+  'jquery',
+  '++theme++multitheme/javascript/jquery.countdown.min'
+  ], function(Base) {
+    'use strict';
+    $('.count').each(function () {
+      $(this).prop('Counter',0).animate({
+      Counter: $(this).text()
+      }, {
+        duration: 4000,
+          easing: 'swing',
+            step: function (now) {
+              $(this).text(Math.ceil(now));
+        }
+        });
+        });
+  });
+</script>
+<tal:define tal:define="load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or '';">
+    <link rel="stylesheet" href="++theme++multitheme/css/${css_file}.css" tal:condition="load_css">
+</tal:define>
+</section>

@@ -1,0 +1,41 @@
+<section id="fragment-testimonials"
+         class="testimonial ${view/data/color1}"
+         tal:define="folder_url nocall:request/form/folder_url|None;
+            title context/?folder_url/Title|None;
+            load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or ''"
+         data-anchor="anchor-${title}"
+         title="${title}">
+ 	<div class="container" tal:condition="folder_url">
+		<div class="section-header">
+			<h2 class="white-text">${title}</h2>
+			<h6 class="white-text" tal:content="context/?folder_url/Description|None" />
+		</div>
+		<div id="client-feedbacks" class="row" data-scrollreveal="enter right after 0s over 1s" data-sr-init="true" data-sr-complete="true">
+			<div tal:repeat="item
+				 context/?folder_url/@@contentlisting"
+				 class="feedback-box">
+				<div class="message" tal:content="item/Description">
+				</div>
+				<div class="client" tal:define="item_url item/getURL|item/absolute_url">
+					<div class="quote ${view/data/color2}">
+						<i class="fa fa-quote-left"></i>
+					</div>
+					<div class="client-info" >
+						<a class="client-name" href="${item_url}" target="_blank">
+							<div>${item/Title}</div>
+						</a>
+						<!--div class="client-company" tal:content="item/Description">
+						</div-->
+					</div>
+					<div class="client-image hidden-xs" tal:condition="exists: python: item.image">
+						<img alt="customer-image"
+							       class="img-responsive"
+                		 alt="${item/Title}"
+                     src="${item_url}/@@images/image/thumb" />
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+<link rel="stylesheet" href="++theme++multitheme/css/${view/data/css_file}.css" tal:condition="load_css">
+</section>

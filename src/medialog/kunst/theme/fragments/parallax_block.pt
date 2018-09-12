@@ -1,0 +1,45 @@
+<section id="fragment-${view/id}"
+  tal:define="title view/data/title|None; p_image view/one_image|None; image_size view/data/image_size|None"
+  title="${title}"
+  data-anchor="anchor-${title}"
+  class="parallax-background"
+  data-jarallax-original-styles="null"
+  style="z-index: 0; position: relative; height:${view/data/height}px; background-image: none;
+        background-attachment: scroll; background-size: auto;">
+    <div class="container">
+            <h1>${title}</h1>
+            <h3>${view/data/description}</h3>
+            <tal:block define="value nocall:view/data/text|nothing;
+                               output_relative_to nocall:value/@@output_relative_to|nothing"
+                       condition="output_relative_to"
+                       content="structure python:output_relative_to(context)" />
+            <div class="button_group">
+                <a class="btn btn-primary plone-background" href="${view/data/url1|None}"
+                  tal:condition="view/data/button1">
+                    <span class="fa ${view/data/icon1}"></span>
+                    ${view/data/button1}
+                </a>
+                <a class="btn btn-outline plone-background-opposite" href="${view/data/url2|None}"
+                    tal:condition="view/data/button2">
+                    <span class="fa ${view/data/icon2}"></span>
+                    ${view/data/button2}
+                </a>
+            </div>
+    </div>
+
+
+<div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; bottom: 0; width: 100%; height: 100%; opacity: ${view/data/opacity};
+    overflow: hidden; pointer-events: none; visibility: hidden; z-index: -100;">
+
+    <div style="background-size: 100%; background-image: url( ${p_image/getURL}/@@images/image/${image_size} );
+        position: fixed; top: 0px; left: 0px; bottom: 0; width: 100%; height: 100%; overflow: hidden;
+        pointer-events: none; margin-left: 0px; margin-top: -492.36328125px; visibility: visible; transform: translate3d(0px, 174.60000000000002px, 0px);
+        background-position: 50% 50%; background-repeat: no-repeat no-repeat;"></div>
+</div>
+
+<tal:define tal:define="load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or '';">
+    <link rel="stylesheet" href="++theme++multitheme/css/parallax1.css" tal:condition="load_css">
+</tal:define>
+ 
+
+</section>

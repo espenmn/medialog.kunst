@@ -1,0 +1,24 @@
+
+.contentloader .easyformForm {
+	background: #EEE;
+	padding-top: 2em;
+	padding-bottom: 2em;
+}
+
+.contentloader .documentFirstHeading {
+	border-bottom: 0px hidden;
+}
+.contentloader #content {
+	padding-top: 2em;
+	padding-left: 2em;
+	padding-right: 2em;;
+	background: #EEE;
+}
+
+.contentloader .roundbutton {
+  padding: 1em 2em;
+  border-radius: 2em;
+  display:  block;
+  margin:  1em auto;
+}
+

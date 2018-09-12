@@ -1,0 +1,29 @@
+<ul id="fullpagemenu"></ul>
+  <script>require([
+      'jquery',
+      'https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.5/jquery.fullpage.js'
+      ], function(Base) {
+      $(document).ready(function() {
+        var array = [];
+        $('[id^=fragment]').each(function() {
+          var fragment_id = $(this).attr('id') ;
+          var fragment_title = $(this).attr('title') || $(this).attr('id') ;
+          var fragment_anchor = 'anchor-' + fragment_id;
+          array.push(fragment_anchor);
+          $( "#fullpagemenu" ).append( "<li data-menuanchor='" + fragment_anchor + "'><a href='#" + fragment_id + "'>" + fragment_title + "</a></li>" );
+        });
+        $('.viewpermission-none #content').fullpage({
+          navigation: true,
+          paddingTop:0,
+		      paddingBottom: '0',
+          menu: '#fullpagemenu',
+          anchors: array,
+          fixedElements: '#fullpagemenu, #mainnavigation, #portal-footer-wrapper',
+          responsiveWidth: 1000,
+		      sectionSelector: '.mosaic-grid-row .mosaic-tile-content > section'});
+        });
+      });
+  </script>
+  <tal:define tal:define="load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or '';">
+    <link rel="stylesheet" href="++theme++multitheme/css/fullpage_menu.css" tal:condition="load_css">
+  </tal:define>

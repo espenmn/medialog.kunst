@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="medialog.kunst">
+
+  <i18n:registerTranslations directory="locales" />
+
+  <includeDependencies package="." />
+
+  <include package=".browser" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="medialog.kunst"
+      directory="profiles/default"
+      description="Installs the medialog.kunst add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="medialog.kunst (uninstall)"
+      directory="profiles/uninstall"
+      description="Uninstalls the medialog.kunst add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.uninstall"
+      />
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="medialog.kunst-hiddenprofiles" />
+
+  <plone:static
+      directory="theme"
+      type="theme"
+      name="kunsttheme" />
+
+</configure>

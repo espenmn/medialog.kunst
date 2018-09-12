@@ -1,0 +1,83 @@
+<div class="container">
+
+  <tal:repeat tal:repeat="etasje python:['1','2','3','4','5','6']">
+   <button class="${etasje}etg-div">
+    <!--a href="#${etasje}etg" class="white"-->${etasje}. etasje<!--/a-->
+   </button>
+  </tal:repeat>
+
+<tal:repeat tal:repeat="etasje python:['1','2','3','4','5','6']">
+
+<div id="${etasje}etg-div" class="etasjer"> 
+    <h1 id="${etasje}etg">${etasje}. etasje</h1>
+    <div id="map${etasje}" style="width:100%; height: 678px;"></div>
+    
+    <p> <br/></p>
+    
+</div>
+</tal:repeat>
+
+<script>require([
+      '++theme++kunsttheme/javascript/leaflet'
+      ], function(Base) {
+ <tal:repeat tal:repeat="etasje python:['1','2','3','4','5','6']">
+      var bredde = $('#map${etasje}').width();
+      var hoyde = bredde * 678 / 1000;
+      var zoom = 678 / hoyde;
+      $('#map${etasje}').height(hoyde);
+      var map${etasje} = L.map('map${etasje}', 
+        { crs: L.CRS.Simple, minZoom:-2, maxZoom:0.5, scrollWheelZoom: false, dragging: false });
+      var bounds = [[0,0], [678, 1000], 0];  
+      var image = L.imageOverlay('etasjeplan/etasje0${etasje}/@@images/image/kartutsnitt', bounds).addTo(map${etasje});
+ </tal:repeat>
+ <tal:repeat tal:repeat="item python:context.portal_catalog(portal_type='kunstverk')">
+    <tal:condition tal:define="obj item/getObject; latlngs obj/latlng|None">
+        <tal:condition tal:condition="obj/latlng|None">
+        <tal:repeat tal:repeat="latlng obj/latlng|None">
+           <tal:define tal:define="word python: latlng.split()" tal:condition="latlng">
+            var plassering = L.latLng([${python: word[1]}, ${python: word[2]}]);
+            var myIcon = new L.Icon({ iconUrl: '${item/getURL|item/absolute_url}/@@images/image/thumb', 
+                shadowUrl:  '/etasjeplan/marker-icon.png',
+                iconSize: [70, 70],
+                shadowAnchor: [12, 40],
+                iconAnchor:   [48, 48], 
+                popupAnchor: [0, 60] });
+            L.marker(plassering, {icon: myIcon}).addTo(map${python: word[0]}).bindPopup('<a href="${item/getURL|item/absolute_url}"><h4>${item/Title}</h4></a><p>${item/kunstner}</p><a href="${item/getURL|item/absolute_url}"><img src="${item/getURL|item/absolute_url}/@@images/image/thumb"></a>');
+            </tal:define>   
+        </tal:repeat>
+    </tal:condition>
+    </tal:condition>
+</tal:repeat>
+    map1.setView( [339, 450 ], (zoom * -1) + 0.85 );
+    map2.setView( [339, 450 ], (zoom * -1) + 0.85 );
+    map3.setView( [339, 450 ], (zoom * -1) + 0.85 );
+    map4.setView( [339, 450 ], (zoom * -1) + 0.85 );
+    map5.setView( [339, 450 ], (zoom * -1) + 0.85 );
+    map6.setView( [339, 450 ], (zoom * -1) + 0.85 );
+});
+</script>
+<script>
+    $('button').click(function () {
+        var klass = '#' + $(this).attr('class');
+        $('.etasjer').hide();
+        $(klass).show();
+    });
+</script>
+<link rel="stylesheet" href="++theme++kunsttheme/css/leaflet.css" />
+<style>
+    .leaflet-popup-content {width: 130px}
+    .leaflet-popup-content p {margin-bottom: 2px;}
+    button { margin-bottom: 6px}
+    img.leaflet-marker-icon  {border:  2px solid red; }
+    .subsection-floorplans div.container { padding: 0 !important;}
+    img.leaflet-marker-icon {
+opacity: 0;
+}
+
+img.leaflet-marker-icon:hover {
+opacity: 100;
+width: 128px !important;
+height: auto !important;
+}
+</style>
+</div>

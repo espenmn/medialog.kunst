@@ -1,0 +1,88 @@
+<section tal:define="wall view/get_wallitems|None;
+         items wall/@@contentlisting|context/@@contentlisting;
+         image_size view/data/image_size|None"
+         id="fragment-${view/id}"
+         data-anchor="anchor-images"
+         title="images">
+    <div class="wall-of-images" tal:condition="image_size">
+      <tal:image tal:repeat="item items">
+        <tal:check tal:define="obj item/getObject"
+            tal:condition="python: obj.portal_type == 'Image'">
+        <figure tal:define="obj item/getObject;
+                         scale_func obj/@@images;
+                         scaled_image python:scale_func.scale('image', scale=image_size)"
+                         class="zoomimage"
+                         data-zoom-image="${obj/getURL|obj/absolute_url}/@@images/image">
+        <img tal:replace="structure python:scaled_image.tag()"
+             tal:on-error="" />
+        <a class="zoombutton fa fas fa-search-plus" title="Klikk for å zoome" tal:condition="obj/zoom|None">Slå på zoom</a>
+        
+       </figure>
+       </tal:check>
+     </tal:image>
+    </div>
+
+
+    <script>require([
+      'jquery',
+      ], function(Base) {
+        'use strict';
+        $('.wall-of-images').imagesLoaded(function() {
+          $('.wall-of-images').masonry({
+            itemSelector: 'figure',
+            percentPosition: true
+          });
+        });
+      });
+    </script>
+    <script>require([
+      '++theme++kunsttheme/javascript/jquery.elevatezoom',
+      ], function(Base) {
+        'use strict';
+        $( ".zoombutton" ).click(function() {
+            $(this).html('<div>…  et øyeblikk… laster stort bilde</div>').delay(2000).fadeOut();
+            $("figure.zoomimage").addClass('hidden');
+            $(this).parent().toggleClass('active');
+            $('.active').height('900px');
+            $('.active').removeClass('hidden');
+            $("figure.zoomimage.hidden").hide();
+            $('.wall-of-images').masonry('layout');
+            $(".zoomimage").elevateZoom({
+                zoomType: "inner",
+                loadingIcon: "True",
+                cursor: 'crosshair', 
+            });
+        });
+     });
+    </script>
+    <style tal:define="small view/small; medium view/medium; large view/large">
+      @media only screen and (min-width: 768px) {
+        .wall-of-images figure {
+          width: ${small}%;
+          }
+        }
+
+        @media screen and (min-width: 900px) {
+          .wall-of-images figure {
+              width: ${medium}%;
+          }
+        }
+
+      @media screen and (min-width: 1200px) {
+        .wall-of-images figure {
+              width: ${large}%;
+          }
+      }
+      
+      .zoomimage.hidden {
+        display: none !important
+      }
+      
+      .wall-of-images figure.zoomimage.active {
+	width:  100%;
+}
+    .wall-of-images figure img { border: 1px solid #DDD }
+
+    </style>
+
+</section>

@@ -1,0 +1,34 @@
+<model xmlns:form="http://namespaces.plone.org/supermodel/form"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+xmlns:lingua="http://namespaces.plone.org/supermodel/lingua"
+xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+xmlns:security="http://namespaces.plone.org/supermodel/security"
+xmlns:users="http://namespaces.plone.org/supermodel/users"
+xmlns="http://namespaces.plone.org/supermodel/schema">
+  <schema>
+    <field name="somesetting" type="zope.schema.TextLine">
+      <description/>
+      <required>False</required>
+      <title>somesetting</title>
+    </field>
+    <field name="folder" type="zope.schema.Tuple">
+      <description/>
+      <required>False</required>
+      <title>gfdsgs</title>
+      <value_type  type="zope.schema.Choice">
+        <values>
+          <element>black-background</element>
+          <element>white-background</element>
+          <element>plone-background</element>
+          <element>plone-background-2</element>
+          <element>plone-background-3</element>
+          <element>plone-background-opposite</element>
+          <element>custom-background1</element>
+          <element>custom-background2</element>
+          <element>custom-background3</element>
+        </values>
+
+      </value_type>
+    </field>
+  </schema>
+</model>

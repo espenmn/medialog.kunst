@@ -1,0 +1,12 @@
+<tal:repeat tal:repeat="item python:context.portal_catalog(portal_type='kunstverk')">
+    <tal:condition tal:define="obj item/getObject">
+          <tal:repeat tal:repeat="latlng obj/latlng|None">
+              
+           <tal:define tal:define="word python: latlng.split()" tal:condition="latlng">
+             ${python: word[0]} ${python: word[1]} ${python: word[2]}
+            </tal:define>   
+ 
+        </tal:repeat>
+ 
+    </tal:condition>
+</tal:repeat>

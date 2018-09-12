@@ -1,0 +1,19 @@
+<div id="etasje-kart" 
+    tal:define="etasjekart context/etasje_kart|None" 
+    tal:condition="python: etasjekart!='0'">
+<a name="etasje_kart"></a>
+<h1>${context/etasje_kart}. etasje</h1>
+<div id="map" style="width:100%;"></div>
+<style>
+    .leaflet-popup-content {width: 130px}
+    #map {margin-bottom: 20px; }
+</style>
+<link rel="stylesheet" href="++theme++kunsttheme/css/leaflet.css" />
+<tal:repeat tal:repeat="line context/latlng|None">
+            <tal:define tal:define="words python: line.split()">
+                ${words}
+            </tal:define>
+</tal:repeat>
+   
+    
+</div>

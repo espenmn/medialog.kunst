@@ -1,0 +1,21 @@
+<section id="fragment-${view/id}"
+        tal:define="folder_url nocall:request/form/folder_url|None; portal_type view/data/portal_type|None; load_div view/data/load_div|None; buttontext view/data/buttontext">
+  <tal:conditon tal:condition="folder_url">
+      <tal:repeat tal:repeat="item context/?folder_url/@@contentlisting|None">
+        <div class="folder_load_item" tal:define="item_url item/getURL|item/absolute_url; target_id item/id; type item/portal_type" id="target-${target_id}"
+          tal:condition="python: type==portal_type">
+          <a href="${item_url}">
+            <h1>${item/Title}</h1>
+          </a>
+          <p>${item/Description}</p>
+            <button type="button" class="btn btn-primary">
+              <span class="pat-contentloader" data-pat-contentloader="url:${item_url}?ajax_load=1;target:#target-${target_id};content:${load_div}">${buttontext}
+              </span>
+            </button>
+        </div>
+		   </tal:repeat>
+       <tal:define tal:define="load_css python:context.portal_registry['collective.multitheme.interfaces.ICollectiveMultiThemeSettings.load_css'] or '';">
+           <link rel="stylesheet" href="++theme++multitheme/css/folder_contentload.css" tal:condition="load_css">
+       </tal:define>
+	</tal:conditon>
+</section>

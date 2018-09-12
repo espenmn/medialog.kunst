@@ -1,0 +1,1 @@
+<h2 class="documentFirstHeading">${context/title}<tal:check tal:condition="context/kunstverk|None">: <b>${context/kunstverk}</b></tal:check></h2>

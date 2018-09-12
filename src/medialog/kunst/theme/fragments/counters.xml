@@ -1,0 +1,59 @@
+<model xmlns:form="http://namespaces.plone.org/supermodel/form"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  xmlns:indexer="http://namespaces.plone.org/supermodel/indexer"
+  xmlns:lingua="http://namespaces.plone.org/supermodel/lingua"
+  xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+  xmlns:security="http://namespaces.plone.org/supermodel/security"
+  xmlns:users="http://namespaces.plone.org/supermodel/users"
+  xmlns="http://namespaces.plone.org/supermodel/schema">
+<schema>
+<field name="css_file" type="zope.schema.Choice">
+    <description/>
+    <required>True</required>
+    <title>Style</title>
+    <values>
+      <element>counters1</element>
+      <element>counters2</element>
+      <element>counters3</element>
+    </values>
+</field>
+<field name="folder_url" type="zope.schema.TextLine">
+  <description/>
+  <required>True</required>
+  <title>Path to folder</title>
+  <default>Folder</default>
+</field>
+<field name="color1" type="zope.schema.Choice">
+    <description/>
+    <required>True</required>
+    <title>Icon color</title>
+    <values>
+      <element>black</element>
+      <element>white</element>
+      <element>plone-link</element>
+      <element>plone-link-2</element>
+      <element>plone-link-3</element>
+      <element>plone-link-opposite</element>
+      <element>custom-color1</element>
+      <element>custom-color2</element>
+      <element>custom-color3</element>
+    </values>
+  </field>
+  <field name="color2" type="zope.schema.Choice">
+      <description/>
+      <required>True</required>
+      <title>Header color</title>
+      <values>
+        <element>black</element>
+        <element>white</element>
+        <element>plone-link</element>
+        <element>plone-link-2</element>
+        <element>plone-link-3</element>
+        <element>plone-link-opposite</element>
+        <element>custom-color1</element>
+        <element>custom-color2</element>
+        <element>custom-color3</element>
+      </values>
+    </field>
+</schema>
+</model>

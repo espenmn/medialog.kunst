@@ -1,0 +1,49 @@
+<model xmlns:form="http://namespaces.plone.org/supermodel/form"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  xmlns:indexer="http://namespaces.plone.org/supermodel/indexer"
+  xmlns:lingua="http://namespaces.plone.org/supermodel/lingua"
+  xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+  xmlns:security="http://namespaces.plone.org/supermodel/security"
+  xmlns:users="http://namespaces.plone.org/supermodel/users"
+  xmlns="http://namespaces.plone.org/supermodel/schema">
+<schema>
+  <field name="linked_folder" type="zope.schema.Choice">
+      <description>Choose Folder for images for you image wall. Leave empty for current folder</description>
+      <required>False</required>
+      <title>Select a folder (or folderish object)</title>
+      <source>collective.themefragments.tiles.CatalogSource</source>
+ </field>
+ <field name="image_size" type="zope.schema.Choice">
+  <description>Choose Image Size (scale) for you image wall</description>
+  <required>True</required>
+  <title>Image Size</title>
+  <default>preview</default>
+  <vocabulary>plone.app.vocabularies.ImagesScales</vocabulary>
+ </field>
+
+ <field name="small" type="zope.schema.Int">
+  <description>Image columns on small screen</description>
+  <required>True</required>
+  <title>Images on same row (768px)</title>
+  <default>2</default>
+  <min>1</min>
+ </field>
+
+ <field name="medium" type="zope.schema.Int">
+  <description>Image columns on small screen</description>
+  <required>True</required>
+  <title>Images on same row (900px)</title>
+  <default>3</default>
+  <min>1</min>
+ </field>
+
+ <field name="large" type="zope.schema.Int">
+  <description>Image columns on large screen</description>
+  <required>True</required>
+  <title>Images on same row (1200px)</title>
+  <default>4</default>
+  <min>1</min>
+ </field>
+
+</schema>
+</model>

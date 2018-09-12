@@ -1,0 +1,22 @@
+<div tal:define="etasjekart context/etasje_kart|None" tal:condition="python: etasjekart!='0'">
+<a name="etasje_kart"></a>
+<link rel="stylesheet" href="++theme++kunsttheme/css/leaflet.css" />
+<script>require([
+      '++theme++kunsttheme/javascript/leaflet'
+      ], function(Base) {
+      var map = L.map('map', 
+        { crs: L.CRS.Simple, minZoom:-3, maxZoom:4 }); 
+        var bounds = [[0,0], [678,1000], 1]; 
+        var image = L.imageOverlay('etasjeplan/etasje0${context/etasje_kart|None}/@@images/image/kartutsnitt', bounds).addTo(map); 
+        var plassering = L.latLng([${context/lat|None}, ${context/lng|None}]);
+        L.marker(plassering).addTo(map).bindPopup('<h4>${context/title}</h4><img src="${context/getURL|context/absolute_url}/@@images/image/thumb">');
+        map.setView( [${context/lat|None}, ${context/lng|None}], 0);
+});
+</script>
+<h1>${context/etasje_kart}. etasje</h1>
+<div id="map" style="width:100%; height: 678px;"></div>
+<style>
+    .leaflet-popup-content {width: 130px}
+    #map {margin-bottom: 20px; }
+</style>
+</div>
