@@ -4,6 +4,6 @@
     data-pat-plone-modal=""
     href="#etasje-kart" title="Vis plassering på kart">
         <img src="etasjeplan/etasje0${context/etasje_kart|None}/@@images/image/thumb"></a>
-    
+
     </p>
 </div>
